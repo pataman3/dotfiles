@@ -1,0 +1,11 @@
+# dotfiles
+usage: config <add/commit/push>
+
+
+## emacs
+### mu4e
+
+source: https://doubleloop.net/2019/09/06/emacs-mu4e-mbsync-and-protonmail/
+sync cmd: mbsync -a
+index cmd: mu index --maildir=~/.mail
+
