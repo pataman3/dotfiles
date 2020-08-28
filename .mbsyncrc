@@ -1,0 +1,100 @@
+IMAPAccount protonmail
+Host 127.0.0.1
+Port 1143
+User bryan@bryanbean.com
+PassCmd "gpg -q -d ~/.authinfo.gpg | awk 'FNR == 1 {print $8}'"
+SSLType NONE
+
+IMAPStore pm-remote
+Account protonmail
+
+MaildirStore pm-local
+Path ~/.mail/pm/
+Inbox ~/.mail/pm/inbox/
+
+Channel pm-inbox
+Master :pm-remote:
+Slave :pm-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel pm-sent
+Master :pm-remote:"Sent"
+Slave :pm-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Channel pm-trash
+Master :pm-remote:"Trash"
+Slave :pm-local:"trash"
+Create Both
+Expunge Both
+SyncState *
+
+Channel pm-spam
+Master :pm-remote:"Spam"
+Slave :pm-local:"spam"
+Create Both
+Expunge Both
+SyncState *
+
+Group protonmail
+Channel pm-inbox
+Channel pm-sent
+Channel pm-trash
+Channel pm-spam
+
+
+
+IMAPAccount gmail
+Host imap.gmail.com
+User bryanandersbean@gmail.com
+PassCmd "gpg -q -d ~/.authinfo.gpg | awk 'FNR == 2 {print $8}'"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gm-remote
+Account gmail
+
+MaildirStore gm-local
+Path ~/.mail/gm/
+Inbox ~/.mail/gm/inbox/
+
+Channel gm-inbox
+Master :gm-remote:
+Slave :gm-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gm-sent
+Master :gm-remote:"\[Gmail\]/Sent\ Mail"
+Slave :gm-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gm-trash
+Master :gm-remote:"\[Gmail\]/Trash"
+Slave :gm-local:"trash"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gm-spam
+Master :gm-remote:"\[Gmail\]/Spam"
+Slave :gm-local:"spam"
+Create Both
+Expunge Both
+SyncState *
+
+Group gmail
+Channel gm-inbox
+Channel gm-sent
+Channel gm-trash
+Channel gm-spam
