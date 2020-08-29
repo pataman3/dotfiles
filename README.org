@@ -1,10 +1,19 @@
-* dotfiles
-- usage: config <add/commit/push>
-
-
-** emacs
-*** mu4e
-
-- source: https://doubleloop.net/2019/09/06/emacs-mu4e-mbsync-and-protonmail/
-- sync cmd: mbsync -a
-- index cmd: mu index --maildir=~/.mail
+* Dotfiles
+Usage
+- Git alias
+  - =config <add/commit/push>=
+* Emacs
+** mu4e
+Usage
+- Syncing
+  - =mbsync -a=
+- Indexing
+  - =mu index --maildir=~/.mail=
+*** ProtonMail
+Sources
+- https://doubleloop.net/2019/09/06/emacs-mu4e-mbsync-and-protonmail
+  - For settings for IMAP/SMTP for ProtonMail for .mbsyncrc
+*** Gmail
+Sources
+- https://www.djcbsoftware.nl/code/mu/mu4e/Gmail-configuration.html
+  - For settings for IMAP/SMTP for Gmail for .mbsyncrc
