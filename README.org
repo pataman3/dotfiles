@@ -1,64 +1,65 @@
 * Dotfiles
 Setup
-1. Create a repository for your dotfiles on GitHub and clone it in your home directory
-2. Move the contents from .git to the repository itself and delete the now empty .git directory
-3. Make the repository bare
+1. Create a repo for your dotfiles on GitHub and clone it in your home directory
+2. Move the contents from .git to the repo itself and delete the now empty .git directory
+3. Make the repo bare
   #+NAME:
   #+BEGIN_SRC bash
-    git config --bool core.bare true
+  git config --bool core.bare true
   #+END_SRC
 4. Create an alias in your .bashrc file so that you can easily engage with your dotfiles repo
   #+NAME:
   #+BEGIN_SRC bash
-    alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+  alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
   #+END_SRC
 5. Turn off untracked files
   #+NAME:
   #+BEGIN_SRC bash
-    config config --local status.showUntrackedFiles no
+  config config --local status.showUntrackedFiles no
   #+END_SRC
 Usage
-- Command to engage with this dotfiles repository
+- Command to engage with this dotfiles repo
   #+NAME:
   #+BEGIN_SRC bash
-    config add/rm/commit/push/etc.
+  config add/rm/commit/push/etc.
   #+END_SRC
 Sources
 - https://www.youtube.com/watch?v=tBoLDpTWVOM
-  - Most of this setup was sourced from Derek Taylor's great video on his dotfile repository
+  - This setup was sourced from Derek Taylor's great video on his own dotfile repo, and is just here for my own future reference
 * Doom Emacs
 Setup
 1. Install dependencies for Doom Emacs
   #+NAME:
   #+BEGIN_SRC bash
-    sudo apt-get install git fd-find ripgrep
+  sudo apt-get install git fd-find ripgrep
   #+END_SRC
 2. Clone Doom Emacs
   #+NAME:
   #+BEGIN_SRC bash
-    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+  git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
   #+END_SRC
 3. Install Doom Emacs
   #+NAME:
   #+BEGIN_SRC bash
-    ~/.emacs.d/bin/doom install
+  ~/.emacs.d/bin/doom install
   #+END_SRC
 Sources
 - https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org
-  - Setup process taken from the Doom Emacs repo itself
+  - Setup process taken from the Doom Emacs repo
 ** mu4e
 Setup
-1. Activate the mu4e package in Doom Emacs
-Usage
-- Command to sync mail accounts
+1. Activate the mu4e package in Doom Emacs by navigating to =~/.doom.d/init.el= and uncommenting the line =;; (mu4e +gmail)=
+2. Setup Protonmail
+3. Setup Gmail
+4. Sync mail accounts
   #+NAME:
   #+BEGIN_SRC bash
-    mbsync -a
+  mbsync -a
   #+END_SRC
-- Command to index mail accounts
+5. Index mail accounts
   #+NAME:
   #+BEGIN_SRC bash
-    mu index --maildir=~/.mail
+  mu index --maildir=~/.mail
   #+END_SRC
 Sources
 - https://www.djcbsoftware.nl/code/mu/mu4e/index.html
