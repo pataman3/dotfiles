@@ -1,3 +1,23 @@
+* My dual boot setup
+** Using Arch Linux and Windows 10
+*** Opening questions, notes, and prerequisites
+- *Why not run exclusively Arch Linux?* Games on Linux, through Wine and the like, aren't for me and probably won't be for quite some time.
+- *Why not run exclusively Windows 10?* Linux is more fun.
+- *Why not run either as a VM?* VMs are disposable to me. Dual booting feels more permanent.
+- This guide is mostly for my own reference, in case I lose my PC or everything breaks or whatever.
+- If you're following along, it's very likely chunks of this setup won't apply to you. *Why is that?* We don't have the same computer and I'm really picky. At sections of this guide I know will differ, say by way of your installed hardware (i.e. iGPU[AMD or Intel] and/or dGPU(s)[AMD or Nvidia]), I'll point them out. But, I definitely won't cover everything, and you'll have to do your share of Googling.
+- Anywhere there's the option to choose 64 bit over 32 bit, I'm choosing 64 bit.
+- I'm assuming your motherboard runs UEFI. *Why use UEFI and not BIOS?* UEFI is the newer standard and uses the GPT standard.
+- I'm assuming you have access to a separate computer with an internet connection (for downloading disc image files, creating live USBs, and if/when things go wrong). 
+- I'm assuming you've got at least 3 USB drives.
+- I'm assuming anything important is externally backed up and that your system's drives are formatted.
+*** Setup
+1. Create live USBs for Arch Linux, GParted, and Windows 10.
+  1. Download [[https://www.archlinux.org/download][Arch Linux]] and [[https://gparted.org/download.php][GParted]] disc image files.
+  2. Use a tool like [[https://rufus.ie][Rufus]] or [[https://www.balena.io/etcher][balenaEtcher]] to write those image files to USBs.
+  3. Use Microsoft's [[https://www.microsoft.com/en-us/software-download/windows10][Windows 10 media creation tool]] to create a live Windows 10 USB.
+*** Windows 10 Installation
+*** Arch Linux Installation
 * Dotfiles
 Setup
 1. Create a repo for your dotfiles on GitHub and clone it in your home directory
@@ -7,7 +27,7 @@ Setup
   #+BEGIN_SRC bash
   git config --bool core.bare true
   #+END_SRC
-4. Create an alias in your .bashrc file so that you can easily engage with your dotfiles repo
+4. Create an alias in your shell of choice's *rc file, so that you can easily engage with your dotfiles repo
   #+NAME:
   #+BEGIN_SRC bash
   alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
@@ -17,6 +37,10 @@ Setup
   #+BEGIN_SRC bash
   config config --local status.showUntrackedFiles no
   #+END_SRC
+Reset
+1. Clone your dotfiles repo
+2. Move all of the content from your repo, except the .git directory, into your home directory.
+3. Follow Dotfiles -> Setup -> Steps 2-5
 Usage
 - Command to engage with this dotfiles repo
   #+NAME:
@@ -31,6 +55,8 @@ Setup
 1. Install dependencies for Doom Emacs
   #+NAME:
   #+BEGIN_SRC bash
+  sudo pacman -S ripgrep
+  OR
   sudo apt-get install git fd-find ripgrep
   #+END_SRC
 2. Clone Doom Emacs
