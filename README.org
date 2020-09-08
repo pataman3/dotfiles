@@ -75,17 +75,23 @@ Sources
 ** mu4e
 Setup
 1. Activate the mu4e package in Doom Emacs by navigating to =~/.doom.d/init.el= and uncommenting the line =;; (mu4e +gmail)=
-2. Setup Protonmail
-3. Setup Gmail
-4. Sync mail accounts
+2. Follow Protonmail setup
+3. Follow Gmail setup
+4. Create the =~/.mail/=, =~/.mail/pm/=, and =~/.mail/gm/= directories
+5. Sync mail accounts
   #+NAME:
   #+BEGIN_SRC bash
   mbsync -a
   #+END_SRC
-5. Index mail accounts
+6. Initialize mail directory
   #+NAME:
   #+BEGIN_SRC bash
-  mu index --maildir=~/.mail
+  mu init --maildir=~/.mail
+  #+END_SRC
+7. Index mail accounts
+  #+NAME:
+  #+BEGIN_SRC bash
+  mu index
   #+END_SRC
 Sources
 - https://www.djcbsoftware.nl/code/mu/mu4e/index.html
