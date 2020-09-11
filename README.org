@@ -125,14 +125,14 @@
         end
       end
       #+END_SRC
-  - Then call the agent by adding the following in your =~/.config/fish/config.fish=
-      #+BEGIN_SRC shell
-      fish_ssh_agent
-      #+END_SRC
-  - Then add the following to your =~/.ssh/config=
-      #+BEGIN_SRC shell
-      AddKeysToAgent yes
-      #+END_SRC
+    - Then call the agent by adding the following in your =~/.config/fish/config.fish=
+        #+BEGIN_SRC shell
+        fish_ssh_agent
+        #+END_SRC
+    - Then add the following to your =~/.ssh/config=
+        #+BEGIN_SRC shell
+        AddKeysToAgent yes
+        #+END_SRC
 4. Backup your SSH public and private keys
   #+BEGIN_SRC shell
   cp ~/.ssh/id_rsa ~/WHEREVER/id_rsa
