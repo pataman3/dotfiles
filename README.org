@@ -18,56 +18,12 @@
   3. Use Microsoft's [[https://www.microsoft.com/en-us/software-download/windows10][Windows 10 media creation tool]] to create a live Windows 10 USB.
 *** Windows 10 Installation
 *** Arch Linux Installation
+
+
+
 * Software
-** GnuPG
-*** Initial setup
-1. Navigate to your home directory and generate a key
-  #+BEGIN_SRC shell
-  gpg --full-generate-key
-  #+END_SRC
-  - Press enter to accept "RSA and RSA"
-  - Enter "4096" for the desired key size
-  - Let the key be available for a year
-  - Verify your selections
-  - Enter your full name "firstname lastname"
-  - Enter the email you use for Git
-  - You can leave the comment empty
-  - Your passphrase should be decently complex
-2. Locate the newly created GPG key
-  #+BEGIN_SRC shell
-  gpg --list-secret-keys --keyid-format LONG
-  #+END_SRC
-    - Copy the key ID which you just created
-    - The key is in the format below
-      - =sec 4096R/KEY_ID 2016-03-10 [expires: 2017-03-10]=
-3. Ensure git always signs commits on your system
-  #+BEGIN_SRC shell
-  git config --global commit.gpgsign true
-  git config --global user.signingkey KEY_ID
-  #+END_SRC
-4. Back up your GPG public and private keys
-  - If you do back up your private key this way, just know that anyone who gets a hold of =private.pgp= can effectively sign as you
-  #+BEGIN_SRC shell
-  gpg --output public.pgp --armor --export YOUR_EMAIL@EXAMPLE.COM
-  gpg --output private.pgp --armor --export-secret-key YOUR_EMAIL@EXAMPLE.COM
-  #+END_SRC
-*** Restore
-1. Import your GPG public and private keys
-  #+BEGIN_SRC shell
-  gpg --import public.pgp private.pgp
-  #+END_SRC
-2. Locate your GPG key
-  #+BEGIN_SRC shell
-  gpg --list-secret-keys --keyid-format LONG
-  #+END_SRC
-    - Copy the key ID
-    - The key is in the format below
-      - =sec 4096R/KEY_ID 2016-03-10 [expires: 2017-03-10]=
-3. Ensure git always signs commits on your system
-  #+BEGIN_SRC shell
-  git config --global commit.gpgsign true
-  git config --global user.signingkey KEY_ID
-  #+END_SRC
+
+
 ** Dotfiles
 *** Initial setup
 1. Create a repo for your dotfiles on GitHub and clone it in your home directory
@@ -87,7 +43,7 @@
 *** Restore
 1. Clone your dotfiles repo
 2. Move all of the content from your repo, except the .git directory, into your home directory.
-3. Follow Dotfiles -> Setup -> Steps 2-5
+3. Follow Dotfiles -> Initial setup -> Steps 2-5
 *** Usage
 - Command to engage with this dotfiles repo
   #+BEGIN_SRC shell
@@ -96,6 +52,146 @@
 *** Sources
 - https://www.youtube.com/watch?v=tBoLDpTWVOM
   - This setup was sourced from Derek Taylor's great video on his own dotfile repo, and is just here for my own future reference
+
+
+** SSH
+*** Initial setup
+1. Navigate to your home directory and generate a key
+  #+BEGIN_SRC shell
+  ssh-keygen -t rsa -b 4096 -C "YOUR_EMAIL@EXAMPLE.COM"
+  #+END_SRC
+  - Press enter to accept the default location
+  - Then enter a passphrase
+  - Then enter that passphrase again
+2. Add the SSH key to the SSH agent
+  #+BEGIN_SRC shell
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_rsa
+  #+END_SRC
+3. Adding the SSH key to the SSH agent every session is tedious, so it should be automated; below are functions to automate SSH agents in both the bash and fish shells
+  - For the bash shell
+    - Add the following to =~/.bashrc=
+      #+BEGIN_SRC shell
+      SSH_ENV="$HOME/.ssh/env"
+      function start_agent {
+        echo "Initialising new SSH agent..."
+        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+        echo succeeded
+        chmod 600 "${SSH_ENV}"
+        . "${SSH_ENV}" > /dev/null
+        /usr/bin/ssh-add;
+      }
+      if [ -f "${SSH_ENV}" ]; then
+        . "${SSH_ENV}" > /dev/null
+        #ps ${SSH_AGENT_PID} doesn't work under cywgin
+        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+          start_agent;
+        }
+      else
+        start_agent;
+      fi
+      #+END_SRC
+  - For the fish shell
+    - Add the following to =~/.config/fish/functions/fish_ssh_agent.fish=
+      #+BEGIN_SRC shell
+      function __ssh_agent_is_started -d "check if ssh agent is already started"
+        if begin; test -f $SSH_ENV; and test -z "$SSH_AGENT_PID"; end
+          source $SSH_ENV > /dev/null
+        end
+
+        if test -z "$SSH_AGENT_PID"
+          return 1
+        end
+
+        ps -ef | grep $SSH_AGENT_PID | grep -v grep | grep -q ssh-agent
+        #pgrep ssh-agent
+        return $status
+      end
+
+      function __ssh_agent_start -d "start a new ssh agent"
+        ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
+        chmod 600 $SSH_ENV
+        source $SSH_ENV > /dev/null
+        true  # suppress errors from setenv, i.e. set -gx
+      end
+
+      function fish_ssh_agent --description "Start ssh-agent if not started yet, or uses already started ssh-agent."
+        if test -z "$SSH_ENV"
+          set -xg SSH_ENV $HOME/.ssh/environment
+        end
+
+        if not __ssh_agent_is_started
+          __ssh_agent_start
+        end
+      end
+      #+END_SRC
+  - Then call the agent by adding the following in your =~/.config/fish/config.fish=
+      #+BEGIN_SRC shell
+      fish_ssh_agent
+      #+END_SRC
+  - Then add the following to your =~/.ssh/config=
+      #+BEGIN_SRC shell
+      AddKeysToAgent yes
+      #+END_SRC
+4. Backup your SSH public and private keys
+  #+BEGIN_SRC shell
+  cp ~/.ssh/id_rsa ~/WHEREVER/id_rsa
+  cp ~/.ssh/id_rsa.pub ~/WHEREVER/id_rsa.pub
+  #+END_SRC
+*** Restore
+1. Import your SSH public and private keys
+  #+BEGIN_SRC shell
+  cp ~/WHEREVER/id_rsa ~/.ssh/id_rsa
+  cp ~/WHEREVER/id_rsa.pub ~/.ssh/id_rsa.pub
+  #+END_SRC
+2. Follow SSH -> Initial setup -> Steps 2-3
+*** Sources
+- http://mah.everybody.org/docs/ssh
+  - The bash shell ssh agent code
+- https://github.com/ivakyb/fish_ssh_agent
+  - The fish shell ssh agent code
+
+
+** GnuPG
+*** Initial setup
+1. Navigate to your home directory and generate a key
+  #+BEGIN_SRC shell
+  gpg --full-generate-key
+  #+END_SRC
+  - Press enter to accept "RSA and RSA"
+  - Enter "4096" for the desired key size
+  - Let the key be available for a year
+  - Verify your selections
+  - Enter your full name "FIRST LAST"
+  - Enter the email you use for Git
+  - You can leave the comment empty
+  - Your passphrase should be decently complex
+2. Locate the newly created GPG key
+  #+BEGIN_SRC shell
+  gpg --list-secret-keys --keyid-format LONG
+  #+END_SRC
+    - Copy the key ID which you just created
+    - The key is in the format below
+      - =sec 4096R/KEY_ID 2016-03-10 [expires: 2017-03-10]=
+3. Ensure git always signs commits on your system
+  #+BEGIN_SRC shell
+  git config --global commit.gpgsign true
+  git config --global user.signingkey KEY_ID
+  #+END_SRC
+4. Back up your GPG public and private keys
+  - If you do back up your private key this way, just know that anyone who gets a hold of =private.pgp= can effectively sign as you
+  #+BEGIN_SRC shell
+  gpg --export KEY_ID > public.asc
+  gpg --export-secret-key KEY_ID > private.asc
+  #+END_SRC
+*** Restore
+1. Import your GPG public and private keys
+  #+BEGIN_SRC shell
+  gpg --import public.asc private.asc
+  #+END_SRC
+2. Follow GnuPG -> Initial setup -> Steps 2-3
+
+  
 ** Doom Emacs
 *** Initial setup
 1. Install dependencies for Doom Emacs
@@ -115,6 +211,8 @@
 *** Sources
 - https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org
   - Setup process taken from the Doom Emacs repo
+  
+  
 ** mu4e
 *** Initial Setup
 1. Activate the mu4e package in Doom Emacs by navigating to =~/.doom.d/init.el= and uncommenting the line =;; (mu4e +gmail)=
