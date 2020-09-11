@@ -18,8 +18,58 @@
   3. Use Microsoft's [[https://www.microsoft.com/en-us/software-download/windows10][Windows 10 media creation tool]] to create a live Windows 10 USB.
 *** Windows 10 Installation
 *** Arch Linux Installation
-* Dotfiles
-Setup
+* Software
+** GnuPG
+*** Initial setup
+1. Navigate to your home directory and generate a key
+  #+BEGIN_SRC shell
+  gpg --full-generate-key
+  #+END_SRC
+  - Press enter to accept "RSA and RSA"
+  - Enter "4096" for the desired key size
+  - Let the key be available for a year
+  - Verify your selections
+  - Enter your full name "firstname lastname"
+  - Enter the email you use for Git
+  - You can leave the comment empty
+  - Your passphrase should be decently complex
+2. Locate the newly created GPG key
+  #+BEGIN_SRC shell
+  gpg --list-secret-keys --keyid-format LONG
+  #+END_SRC
+    - Copy the key ID which you just created
+    - The key is in the format below
+      - =sec 4096R/KEY_ID 2016-03-10 [expires: 2017-03-10]=
+3. Ensure git always signs commits on your system
+  #+BEGIN_SRC shell
+  git config --global commit.gpgsign true
+  git config --global user.signingkey KEY_ID
+  #+END_SRC
+4. Back up your GPG public and private keys
+  - If you do back up your private key this way, just know that anyone who gets a hold of =private.pgp= can effectively sign as you
+  #+BEGIN_SRC shell
+  gpg --output public.pgp --armor --export YOUR_EMAIL@EXAMPLE.COM
+  gpg --output private.pgp --armor --export-secret-key YOUR_EMAIL@EXAMPLE.COM
+  #+END_SRC
+*** Restore
+1. Import your GPG public and private keys
+  #+BEGIN_SRC shell
+  gpg --import public.pgp private.pgp
+  #+END_SRC
+2. Locate your GPG key
+  #+BEGIN_SRC shell
+  gpg --list-secret-keys --keyid-format LONG
+  #+END_SRC
+    - Copy the key ID
+    - The key is in the format below
+      - =sec 4096R/KEY_ID 2016-03-10 [expires: 2017-03-10]=
+3. Ensure git always signs commits on your system
+  #+BEGIN_SRC shell
+  git config --global commit.gpgsign true
+  git config --global user.signingkey KEY_ID
+  #+END_SRC
+** Dotfiles
+*** Initial setup
 1. Create a repo for your dotfiles on GitHub and clone it in your home directory
 2. Move the contents from .git to the repo itself and delete the now empty .git directory
 3. Make the repo bare
@@ -34,20 +84,20 @@ Setup
   #+BEGIN_SRC shell
   dotgit config --local status.showUntrackedFiles no
   #+END_SRC
-Reset
+*** Restore
 1. Clone your dotfiles repo
 2. Move all of the content from your repo, except the .git directory, into your home directory.
 3. Follow Dotfiles -> Setup -> Steps 2-5
-Usage
+*** Usage
 - Command to engage with this dotfiles repo
   #+BEGIN_SRC shell
   dotgit add/rm/commit/push/etc.
   #+END_SRC
-Sources
+*** Sources
 - https://www.youtube.com/watch?v=tBoLDpTWVOM
   - This setup was sourced from Derek Taylor's great video on his own dotfile repo, and is just here for my own future reference
-* Doom Emacs
-Setup
+** Doom Emacs
+*** Initial setup
 1. Install dependencies for Doom Emacs
   #+BEGIN_SRC shell
   sudo pacman -S ripgrep
@@ -62,11 +112,11 @@ Setup
   #+BEGIN_SRC shell
   ~/.emacs.d/bin/doom install
   #+END_SRC
-Sources
+*** Sources
 - https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org
   - Setup process taken from the Doom Emacs repo
 ** mu4e
-Setup
+*** Initial Setup
 1. Activate the mu4e package in Doom Emacs by navigating to =~/.doom.d/init.el= and uncommenting the line =;; (mu4e +gmail)=
 2. Follow Protonmail setup
 3. Follow Gmail setup
@@ -83,7 +133,7 @@ Setup
   #+BEGIN_SRC shell
   mu index
   #+END_SRC
-Sources
+*** Sources
 - https://www.djcbsoftware.nl/code/mu/mu4e/index.html
   - mu4e docs
 *** ProtonMail
