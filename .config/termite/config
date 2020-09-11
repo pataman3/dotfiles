@@ -1,0 +1,6 @@
+[options]
+font = ProFontOTB Regular 9
+
+[colors]
+background = #ecebb8
+foreground = #514342
