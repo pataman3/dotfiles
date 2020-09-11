@@ -1,0 +1,8 @@
+picom & #compositor
+polybar top & #status bar
+nitrogen --restore & #wallpaper
+
+bitwarden &
+discord &
+dropbox &
+protonmail-bridge &
