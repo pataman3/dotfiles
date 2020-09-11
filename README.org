@@ -23,18 +23,15 @@ Setup
 1. Create a repo for your dotfiles on GitHub and clone it in your home directory
 2. Move the contents from .git to the repo itself and delete the now empty .git directory
 3. Make the repo bare
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   git config --bool core.bare true
   #+END_SRC
 4. Create an alias in your shell of choice's *rc file, so that you can easily engage with your dotfiles repo
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   alias dotgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
   #+END_SRC
 5. Turn off untracked files
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   dotgit config --local status.showUntrackedFiles no
   #+END_SRC
 Reset
@@ -43,8 +40,7 @@ Reset
 3. Follow Dotfiles -> Setup -> Steps 2-5
 Usage
 - Command to engage with this dotfiles repo
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   dotgit add/rm/commit/push/etc.
   #+END_SRC
 Sources
@@ -53,20 +49,17 @@ Sources
 * Doom Emacs
 Setup
 1. Install dependencies for Doom Emacs
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   sudo pacman -S ripgrep
   OR
   sudo apt-get install git fd-find ripgrep
   #+END_SRC
 2. Clone Doom Emacs
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
   #+END_SRC
 3. Install Doom Emacs
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   ~/.emacs.d/bin/doom install
   #+END_SRC
 Sources
@@ -79,18 +72,15 @@ Setup
 3. Follow Gmail setup
 4. Create the =~/.mail/=, =~/.mail/pm/=, and =~/.mail/gm/= directories
 5. Sync mail accounts
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   mbsync -a
   #+END_SRC
 6. Initialize mail directory
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   mu init --maildir=~/.mail
   #+END_SRC
 7. Index mail accounts
-  #+NAME:
-  #+BEGIN_SRC bash
+  #+BEGIN_SRC shell
   mu index
   #+END_SRC
 Sources
