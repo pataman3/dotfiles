@@ -30,12 +30,12 @@ Setup
 4. Create an alias in your shell of choice's *rc file, so that you can easily engage with your dotfiles repo
   #+NAME:
   #+BEGIN_SRC bash
-  alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+  alias dotgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
   #+END_SRC
 5. Turn off untracked files
   #+NAME:
   #+BEGIN_SRC bash
-  config config --local status.showUntrackedFiles no
+  dotgit config --local status.showUntrackedFiles no
   #+END_SRC
 Reset
 1. Clone your dotfiles repo
@@ -45,7 +45,7 @@ Usage
 - Command to engage with this dotfiles repo
   #+NAME:
   #+BEGIN_SRC bash
-  config add/rm/commit/push/etc.
+  dotgit add/rm/commit/push/etc.
   #+END_SRC
 Sources
 - https://www.youtube.com/watch?v=tBoLDpTWVOM
