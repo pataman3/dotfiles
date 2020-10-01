@@ -3,3 +3,4 @@
 
 (package! elfeed)
 (package! elfeed-org)
+(package! elfeed-goodies)

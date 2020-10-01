@@ -1,7 +1,20 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; mu4e configuration
+;; appearance
+(setq doom-font (font-spec :family "Iosevka Curly" :size 14)
+    doom-variable-pitch-font (font-spec :family "Iosevka Curly" :size 14))
+(setq doom-theme 'doom-palenight)
+(setq display-line-numbers-type t)
 
+;; elfeed configuration
+(require 'elfeed)
+(require 'elfeed-org)
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org"))
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
+;; mu4e configuration
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
@@ -12,8 +25,7 @@
     mu4e-drafts-folder "/drafts"
     mu4e-trash-folder "/trash"
     mu4e-refile-folder "/archive")
-;; sending mail
-(setq message-send-mail-function 'smtpmail-send-it)
+(setq message-send-mail-function 'smtpmail-send-it) ;; sending mail
 (setq mu4e-contexts
     `( ,(make-mu4e-context
 	  :name "pm"
@@ -44,25 +56,13 @@
                    (smtpmail-smtp-server . "smtp.gmail.com")
                    (smtpmail-smtp-service . 587)
                    (smtpmail-auth-credentials . "~/authinfo.gpg")))))
-;; syncing mail
-(setq mu4e-get-mail-command "mbsync -a"
+(setq mu4e-get-mail-command "mbsync -a" ;; syncing mail
     mu4e-change-filenames-when-moving t
     mu4e-update-interval 120)
 (setq mu4e-sent-messages-behavior 'delete)
 
-
-;; general appearance
-(setq doom-font (font-spec :family "Iosevka Curly" :size 14)
-    doom-variable-pitch-font (font-spec :family "Iosevka Curly" :size 14))
-(setq doom-theme 'doom-palenight)
-
-
-;; org-mode
+;; org configuration
 (after! org
   (setq org-directory "~/Dropbox/org")
   (setq org-agenda-files '("~/Dropbox/org/agenda.org"))
 )
-
-
-(setq display-line-numbers-type t)
-
