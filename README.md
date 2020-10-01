@@ -3,12 +3,143 @@
 ## Using Window 10's Oracle VM VirtualBox
 
 ### Part 1
-- TODO Arch Linux installation
+- TODO Explain virtualbox setup
+1. Set system clock
+    ```
+    timedatectl set-ntp true
+    ```
+2. Partition virtual disk
+    1. Start fdisk
+        ```
+        fdisk /dev/sda
+        ```
+    2. Create partitions
+        ```
+        n
+        p
+        1
+        [ENTER]
+        +200M
+        a
+        ```
+        ```
+        n
+        p
+        2
+        [ENTER]
+        [ENTER]
+        a
+        ```
+        ```
+        w
+        ```
+3. Format partitions
+    ```
+    mkfs.ext4 /dev/sda1 /dev/sda2 # TODO check if you can format two at the same time
+    ```
+4. Mount file system
+    ```
+    mount /dev/sda2 /mnt
+    mkdir /mnt/boot /mnt/home
+    mount /dev/sda1 /mnt/boot
+    ```
+5. Install base system
+    ```
+    pacstrap /mnt base base-devel linux linux-firmware
+    ```
+6. Generate file system table
+    ```
+    genfstab -U /mnt >> /mnt/etc/fstab
+    ```
+7. Enter new file system
+    ```
+    arch-chroot /mnt
+    ```
+8. Build kernel
+    ```
+    mkinitcpio -p linux
+    ```
+9. Set locale
+    ```
+    locale-gen --purge en_US.UTF-8
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf
+    ```
+10. Set timezone
+    ```
+    ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+    ```
+11. Set hostname
+    ```
+    echo "bean" > /etc/hostname
+    ```
+12. Set hosts
+    ```
+    echo -e "127.0.0.1 localhost\n::1 localhost\n127.0.1.1 bean.localdomain bean" > /etc/hosts
+13. Install packages
+    ```
+    pacman -S git grub sudo vim
+    ```
+14. Setup grub
+    ```
+    grub-install --target=i386-pc /dev/sda
+    grub-mkconfig -o /boot/grub/grub.cfg
+    ```
+15. Setup sudo
+    ```
+    sed # TODO regex to uncomment specific line
+    ```
+16. Set root password
+    ```
+    passwd
+    ```
+17. Create user
+    1. Add user
+        ```
+        useradd -m bryan
+        ```
+    2. Set user password
+        ```
+        passwd bryan
+        ```
+    3. Add groups to user
+        ```
+        usermod -aG wheel,audio,video,optical,storage bryan
+        ```
+
+18. Update packages
+    ```
+    pacman -Syyu
+    ```
+19. Exit & unmount
+    ```
+    exit
+    unmount -l /mnt
+    ```
+20. Reboot
+    ```
+    shutdown now
+    ```
+- TODO explain how to unmount arch linux iso
 
 ### Part 2
-- TODO Gnome/tweaks installation
+- Login to user
+1. Setup gnome
+    1. Install gnome
+        ```
+        sudo pacman -S gnome gnome-tweaks
+        ```
+    2. Enable login manager
+        ```
+        sudo systemctl enable gdm
+        ```
+2. Reboot
+    ```
+    sudo shutdown now
+    ```
 
 ### Part 3
+- Login to user
+- TODO explain how to mount virtualbox guest additions iso
 1. Install packages
     ```
     sudo pacman -S emacs isync fd firefox flatpak fish python-pip ripgrep
@@ -38,7 +169,7 @@
     ```
 7. Set fish as default shell
     ```
-    chsh -s /usr/bin/fish #check for sudo
+    chsh -s /usr/bin/fish # TODO check for sudo
     ```
 8. Reboot
     ```
@@ -48,14 +179,12 @@
     - bitwarden
         - download ssh files `id_rsa.pub` & `id_rsa` to `~/Downloads`
         - download gnupg files `public.pgp` & `private.pgp` to `~/Downloads`
-    - discord
     - dropbox
         - ensure files are stored locally
-    - firefox
     - protonmail-bridge
-    - spotify
 
-### Part 2
+### Part 4
+- Login to user
 1. Setup ssh & gnupg
     1. Reset file permissions
         ```
@@ -76,7 +205,8 @@
     sudo shutdown now
     ```
 
-### Part 3
+### Part 5
+- Login to user
 1. Install dotfiles
     ```
     git clone git@github.com:pataman3/dotfiles.git ~
@@ -86,11 +216,11 @@
     git config --bool core.bare true
     git config --local status.showUntrackedFiles no
     ```
-1. Install fonts
+2. Install fonts
     ```
     cp ~/Dropbox/fonts/* ~/.local/share/fonts
     ```
-2. Setup doom emacs & emacs packages
+3. Setup doom emacs & emacs packages
     1. Setup doom emacs
         ```
         ~/.emacs.d/bin/doom sync
@@ -114,7 +244,11 @@
             mu init --maildir=~/.mail
             mu index
             ```
-3. Reboot
+4. Update packages
+    ```
+    package_updater
+    ```
+5. Reboot
     ```
     sudo shutdown now
     ```
