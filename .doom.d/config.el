@@ -13,6 +13,7 @@
 (setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org"))
 (require 'elfeed-goodies)
 (elfeed-goodies/setup)
+(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 900 'elfeed-update))) ;; update feed in 5 seconds every 15 minutes
 
 ;; mu4e configuration
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
@@ -28,12 +29,12 @@
 (setq message-send-mail-function 'smtpmail-send-it) ;; sending mail
 (setq mu4e-contexts
     `( ,(make-mu4e-context
-	  :name "pm"
-	  :enter-func (lambda () (mu4e-message "Entering protonmail context"))
-          :leave-func (lambda () (mu4e-message "Leaving protonmail context"))
-	  :match-func (lambda (msg)
-			(when msg
-			  (mu4e-message-contact-field-matches msg
+        :name "pm"
+        :enter-func (lambda () (mu4e-message "Entering protonmail context"))
+        :leave-func (lambda () (mu4e-message "Leaving protonmail context"))
+        :match-func (lambda (msg)
+                      (when msg
+                        (mu4e-message-contact-field-matches msg
 			    :to "bryan@bryanbean.com")))
 	  :vars '( (user-mail-address . "bryan@bryanbean.com")
 		   (user-full-name . "Bryan Bean")
