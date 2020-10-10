@@ -61,40 +61,44 @@
     ```
     mkinitcpio -p linux
     ```
-9. Set locale
+9. Set clock
+    ```
+    hwclock --systohc
+    ```
+10. Set locale
     ```
     locale-gen --purge en_US.UTF-8
     echo "LANG=en_US.UTF-8" > /etc/locale.conf
     ```
-10. Set timezone
+11. Set timezone
     ```
     ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
     ```
-11. Set hostname
+12. Set hostname
     ```
     echo "bean" > /etc/hostname
     ```
-12. Set hosts
+13. Set hosts
     ```
     echo -e "127.0.0.1 localhost\n::1 localhost\n127.0.1.1 bean.localdomain bean" > /etc/hosts
-13. Install packages
+14. Install packages
     ```
     pacman -S git grub sudo vim
     ```
-14. Setup grub
+15. Setup grub
     ```
     grub-install --target=i386-pc /dev/sda
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
-15. Setup sudo
+16. Setup sudo
     ```
     sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
     ```
-16. Set root password
+17. Set root password
     ```
     passwd
     ```
-17. Create user
+18. Create user
     1. Add user
         ```
         useradd -m bryan
@@ -107,12 +111,12 @@
         ```
         usermod -aG wheel,audio,video,optical,storage bryan
         ```
-18. Exit & unmount
+19. Exit & unmount
     ```
     exit
     umount -l /mnt
     ```
-19. Reboot
+20. Reboot
     ```
     shutdown now
     ```
