@@ -17,7 +17,7 @@
         ```
         n
         p
-        1
+        [ENTER]
         [ENTER]
         +200M
         a
@@ -25,7 +25,7 @@
         ```
         n
         p
-        2
+        [ENTER]
         [ENTER]
         [ENTER]
         a
@@ -36,7 +36,8 @@
         ```
 3. Format partitions
     ```
-    mkfs.ext4 /dev/sda1 /dev/sda2 # TODO check if you can format two at the same time
+    mkfs.ext4 /dev/sda1
+    mkfs.ext4 /dev/sda2
     ```
 4. Mount file system
     ```
@@ -87,7 +88,7 @@
     ```
 15. Setup sudo
     ```
-    sed # TODO regex to uncomment specific line
+    sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
     ```
 16. Set root password
     ```
@@ -106,17 +107,12 @@
         ```
         usermod -aG wheel,audio,video,optical,storage bryan
         ```
-
-18. Update packages
-    ```
-    pacman -Syyu
-    ```
-19. Exit & unmount
+18. Exit & unmount
     ```
     exit
-    unmount -l /mnt
+    umount -l /mnt
     ```
-20. Reboot
+19. Reboot
     ```
     shutdown now
     ```
