@@ -29,6 +29,7 @@
         [ENTER]
         [ENTER]
         a
+        [ENTER]
         ```
         ```
         w
