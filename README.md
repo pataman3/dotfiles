@@ -140,7 +140,7 @@
 - Startup & login to user
 1. Install packages
     ```
-    sudo pacman -S emacs isync fd firefox flatpak fish python-pip ripgrep rsync
+    sudo pacman -S calibre emacs isync fd firefox flatpak fish python-pip ripgrep rsync
     ```
 2. Install yay
     ```
