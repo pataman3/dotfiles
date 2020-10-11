@@ -6,3 +6,5 @@
 	email = bryan@bryanbean.com
 [core]
 	editor = emacs
+[gpg]
+	program = /usr/bin/gpg2
