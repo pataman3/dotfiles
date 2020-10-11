@@ -83,22 +83,26 @@
     echo -e "127.0.0.1 localhost\n::1 localhost\n127.0.1.1 bean.localdomain bean" > /etc/hosts
 14. Install packages
     ```
-    pacman -S git grub sudo vim
+    pacman -S git grub networkmanager sudo vim
     ```
-15. Setup grub
+15. Enable network manager
+    ```
+    systemctl enable NetworkManager.service
+    ```
+16. Setup grub
     ```
     grub-install --target=i386-pc /dev/sda
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
-16. Setup sudo
+17. Setup sudo
     ```
     sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
     ```
-17. Set root password
+18. Set root password
     ```
     passwd
     ```
-18. Create user
+19. Create user
     1. Add user
         ```
         useradd -m bryan
@@ -111,12 +115,12 @@
         ```
         usermod -aG wheel,audio,video,optical,storage bryan
         ```
-19. Exit & unmount
+20. Exit & unmount
     ```
     exit
     umount -l /mnt
     ```
-20. Reboot
+21. Reboot
     ```
     shutdown now
     ```
