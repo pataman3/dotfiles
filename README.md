@@ -168,7 +168,7 @@
     ```
 7. Set fish as default shell
     ```
-    chsh -s /usr/bin/fish # TODO check for sudo
+    chsh -s /usr/bin/fish
     ```
 8. Reboot
     ```
@@ -179,7 +179,6 @@
         - download ssh files `id_rsa.pub` & `id_rsa` to `~/Downloads`
         - download gnupg files `public.pgp` & `private.pgp` to `~/Downloads`
     - dropbox
-        - ensure files are stored locally
     - protonmail-bridge
 
 ### Part 4
@@ -191,6 +190,7 @@
         ```
     2. Setup ssh
         ```
+        mkdir .ssh
         mv ~/Downloads/id_rsa.pub ~/.ssh/id_rsa.pub
         mv ~/Downloads/id_rsa ~/.ssh/id_rsa
         ```
