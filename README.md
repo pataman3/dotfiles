@@ -139,7 +139,7 @@
 - Login to user
 1. Install packages
     ```
-    sudo pacman -S emacs isync fd firefox flatpak fish python-pip ripgrep
+    sudo pacman -S emacs isync fd firefox flatpak fish python-pip ripgrep rsync
     ```
 2. Install yay
     ```
@@ -197,7 +197,7 @@
     3. Setup gnupg
         ```
         gpg --import ~/Downloads/public.pgp ~/Downloads/private.pgp
-        rm -f ~/Downloads/public.pgp ~/Downloads/private.pgp
+        rm -rf ~/Downloads
         ```
 2. Reboot
     ```
@@ -209,9 +209,9 @@
 1. Install dotfiles
     ```
     git clone git@github.com:pataman3/dotfiles.git ~
-    mv ~/dotfiles/* ~
-    mv ~/.git/* ~/dotfiles
-    rm -f ~/.git
+    rsync -a --remove-source-files ~/dotfiles ~
+    rsync -a --remove-source-files ~/.git ~/dotfiles
+    rm -rf ~/.git
     git config --bool core.bare true
     git config --local status.showUntrackedFiles no
     ```
