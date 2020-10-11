@@ -146,6 +146,8 @@
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
+    cd ~
+    rm -rf yay
     ```
 3. Install aur packages
     ```
@@ -157,7 +159,7 @@
     ```
 5. Install pip packages
     ```
-    sudo pip install powerline-shell # TODO check this for accuracy
+    sudo pip install powerline-shell
     ```
 6. Install doom emacs
     ```
