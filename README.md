@@ -84,26 +84,30 @@
     echo -e "127.0.0.1 localhost\n::1 localhost\n127.0.1.1 bean.localdomain bean" > /etc/hosts
 14. Install packages
     ```
-    pacman -S git grub networkmanager sudo vim
+    pacman -S git gnome gnome-tweaks grub networkmanager sudo vim
     ```
-15. Setup grub
+15. Setup gnome
+    ```
+    systemctl enable gdm
+    ```
+16. Setup grub
     ```
     grub-install --target=i386-pc /dev/sda
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
-16. Setup networkmanager
+17. Setup networkmanager
     ```
     systemctl enable NetworkManager.service
     ```
-17. Setup sudo
+18. Setup sudo
     ```
     sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
     ```
-18. Set root password
+19. Set root password
     ```
     passwd
     ```
-19. Create user
+20. Create user
     1. Add user
         ```
         useradd -m bryan
@@ -116,12 +120,12 @@
         ```
         usermod -aG wheel,audio,video,optical,storage bryan
         ```
-20. Exit & unmount
+21. Exit & unmount
     ```
     exit
     umount -l /mnt
     ```
-21. Reboot
+22. Reboot
     ```
     shutdown now
     ```
@@ -129,23 +133,10 @@
 
 ### Part 2
 - Login to user
-1. Setup gnome
-    1. Install gnome
-        ```
-        sudo pacman -S gnome gnome-tweaks
-        ```
-    2. Enable login manager
-        ```
-        sudo systemctl enable gdm
-        ```
-2. Reboot
-    ```
-    sudo shutdown now
-    ```
+- TODO explain how to mount virtualbox guest additions iso
 
 ### Part 3
 - Login to user
-- TODO explain how to mount virtualbox guest additions iso
 1. Install packages
     ```
     sudo pacman -S emacs isync fd firefox flatpak fish python-pip ripgrep
