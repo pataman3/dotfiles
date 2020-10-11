@@ -3,7 +3,8 @@
 ## Using Window 10's Oracle VM VirtualBox
 
 ### Part 1
-- TODO Explain virtualbox setup
+- Insert Arch Linux iso
+- Startup
 1. Set system clock
     ```
     timedatectl set-ntp true
@@ -125,18 +126,18 @@
     exit
     umount -l /mnt
     ```
-22. Reboot
-    ```
-    shutdown now
-    ```
-- TODO explain how to unmount arch linux iso
+- Shutdown
 
 ### Part 2
-- Login to user
-- TODO explain how to mount virtualbox guest additions iso
+- Remove Arch Linux iso
+- Insert VirtualBox Guest Additions iso
+- Startup & login to user
+- Run VirtualBox Guest Additions iso
+- Shutdown
 
 ### Part 3
-- Login to user
+- Remove VirtualBox Guest Additions iso
+- Startup & login to user
 1. Install packages
     ```
     sudo pacman -S emacs isync fd firefox flatpak fish python-pip ripgrep rsync
@@ -170,23 +171,20 @@
     ```
     chsh -s /usr/bin/fish
     ```
-8. Reboot
-    ```
-    sudo shutdown now
-    ```
+- Shutdown
+
+### Part 4
+- Startup & login to user
 - At this point the user must manually sign in to the following services:
     - bitwarden
         - download ssh files `id_rsa.pub` & `id_rsa` to `~/Downloads`
         - download gnupg files `public.pgp` & `private.pgp` to `~/Downloads`
     - dropbox
     - protonmail-bridge
-
-### Part 4
-- Login to user
 1. Setup ssh & gnupg
     1. Reset file permissions
         ```
-        chmod 600 ~/Downloads/id_rsa.pub ~/Downloads/id_rsa ~/Downloads/public.pgp ~/Downloads/private.pgp
+        chmod 600 ~/Downloads/*
         ```
     2. Setup ssh
         ```
@@ -197,27 +195,25 @@
     3. Setup gnupg
         ```
         gpg --import ~/Downloads/public.pgp ~/Downloads/private.pgp
-        rm -rf ~/Downloads
+        rm -rf ~/Downloads/*
         ```
-2. Reboot
-    ```
-    sudo shutdown now
-    ```
+- Shutdown
 
 ### Part 5
-- Login to user
+- Startup & login to user
 1. Install dotfiles
     ```
-    git clone git@github.com:pataman3/dotfiles.git ~
-    rsync -a --remove-source-files ~/dotfiles ~
-    rsync -a --remove-source-files ~/.git ~/dotfiles
+    git clone git@github.com:pataman3/dotfiles.git
+    rsync -a ~/dotfiles/ ~/
+    rm -rf ~/dotfiles/*
+    rsync -a ~/.git/ ~/dotfiles/
     rm -rf ~/.git
     git config --bool core.bare true
     git config --local status.showUntrackedFiles no
     ```
 2. Install fonts
     ```
-    cp ~/Dropbox/fonts/* ~/.local/share/fonts
+    cp -r ~/Dropbox/fonts/* ~/.local/share/fonts
     ```
 3. Setup doom emacs & emacs packages
     1. Setup doom emacs
@@ -227,9 +223,9 @@
     2. Setup mu4e
         1. Update `.authinfo.gpg`
             ```
-            gpg -d .authinfo.gpg
+            gpg -d .authinfo.gpg > .authinfo
             rm -f .authinfo.gpg
-            # TODO use regex to replace pwd with protonmail-bridge password
+            sed -i "1s/password .*/password BRIDGE_PASSWORD/g" .authinfo
             gpg -c .authinfo
             rm -f .authinfo
             dotgit add .authinfo.gpg
@@ -239,7 +235,7 @@
         2. Setup mu
             ```
             mkdir -p ~/.mail/{gm,pm}
-            mbsync -a # TODO determine if it's necessary to be in ~/.mail
+            mbsync -a
             mu init --maildir=~/.mail
             mu index
             ```
@@ -247,10 +243,7 @@
     ```
     package_updater
     ```
-5. Reboot
-    ```
-    sudo shutdown now
-    ```
+- Shutdown
 
 
 
