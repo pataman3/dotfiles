@@ -85,14 +85,14 @@
     ```
     pacman -S git grub networkmanager sudo vim
     ```
-15. Enable network manager
-    ```
-    systemctl enable NetworkManager.service
-    ```
-16. Setup grub
+15. Setup grub
     ```
     grub-install --target=i386-pc /dev/sda
     grub-mkconfig -o /boot/grub/grub.cfg
+    ```
+16. Setup networkmanager
+    ```
+    systemctl enable NetworkManager.service
     ```
 17. Setup sudo
     ```
