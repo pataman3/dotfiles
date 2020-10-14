@@ -9,4 +9,7 @@ set fish_greeting
 # starts ssh agent helper
 fish_ssh_agent
 
+# gpg envvar
+set -x GPG_TTY (tty)
+
 alias dotgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
