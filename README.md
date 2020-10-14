@@ -188,9 +188,9 @@
     rm -rf ~/dotfiles/*
     rsync -a ~/.git/ ~/dotfiles/
     rm -rf ~/.git
-    cd ~/dotfiles
-    git config --bool core.bare true
-    git config --local status.showUntrackedFiles no
+    source ~/.config/fish/config.fish
+    dotgit config --bool core.bare true
+    dotgit config --local status.showUntrackedFiles no
     ```
 2. Install fonts
     ```
