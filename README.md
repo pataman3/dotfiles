@@ -16,24 +16,9 @@
         ```
     2. Create partitions
         ```
-        n
-        p
-        [ENTER]
-        [ENTER]
-        +200M
-        a
-        ```
-        ```
-        n
-        p
-        [ENTER]
-        [ENTER]
-        [ENTER]
-        a
-        [ENTER]
-        ```
-        ```
-        w
+        [N][ENTER][P][ENTER][ENTER][ENTER][+200M][ENTER][A][ENTER]
+        [N][ENTER][P][ENTER][ENTER][ENTER][ENTER][A][ENTER]
+        [W][ENTER]
         ```
 3. Format partitions
     ```
@@ -171,35 +156,30 @@
     ```
     chsh -s /usr/bin/fish
     ```
-- Shutdown
-
-### Part 4
-- Startup & login to user
-- At this point the user must manually sign in to the following services:
+8. At this point the user must manually sign in to the following services:
     - bitwarden
         - download ssh files `id_rsa.pub` & `id_rsa` to `~/Downloads`
         - download gnupg files `public.pgp` & `private.pgp` to `~/Downloads`
     - dropbox
     - protonmail-bridge
-1. Setup ssh & gnupg
-    1. Reset file permissions
-        ```
-        chmod 600 ~/Downloads/*
-        ```
-    2. Setup ssh
-        ```
-        mkdir .ssh
-        mv ~/Downloads/id_rsa.pub ~/.ssh/id_rsa.pub
-        mv ~/Downloads/id_rsa ~/.ssh/id_rsa
-        ```
-    3. Setup gnupg
-        ```
-        gpg --import ~/Downloads/public.pgp ~/Downloads/private.pgp
-        rm -rf ~/Downloads/*
-        ```
+9. Reset file permissions
+    ```
+    chmod 600 ~/Downloads/*
+    ```
+10. Setup ssh
+    ```
+    mkdir .ssh
+    mv ~/Downloads/id_rsa.pub ~/.ssh/id_rsa.pub
+    mv ~/Downloads/id_rsa ~/.ssh/id_rsa
+    ```
+11. Setup gnupg
+    ```
+    gpg --import ~/Downloads/public.pgp ~/Downloads/private.pgp
+    rm -rf ~/Downloads/*
+    ```
 - Shutdown
 
-### Part 5
+### Part 4
 - Startup & login to user
 1. Install dotfiles
     ```
@@ -208,6 +188,7 @@
     rm -rf ~/dotfiles/*
     rsync -a ~/.git/ ~/dotfiles/
     rm -rf ~/.git
+    cd ~/dotfiles
     git config --bool core.bare true
     git config --local status.showUntrackedFiles no
     ```
