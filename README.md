@@ -2,9 +2,57 @@
 
 ## Using Window 10's Oracle VM VirtualBox
 
+### Preconditiions
+- Ensure BIOS is correctly configured
+    ```
+    Using ASUS ROG STRIX Z490-I with BIOS version ???
+    ```
+    1. Open BIOS
+    1. ??Enable Intel VT-d
+    2. ??Enable Compatibility Support Module
+    3. ??Disable Secure Boot
+- Ensure Windows is correctly configured
+    1. Open Command Prompt in administrator mode
+    2. Enable Microsoft Hyper-V
+        ```
+        DISM /online /enable-feature /featurename:Microsoft-Hyper-V-All
+        ```
+    3. Disable basic virtual machine platform
+        ```
+        DISM /online /disable-feature /featurename:VirtualMachinePlatform
+        ```
+    4. Disable basic hypervisor platform
+        ```
+        DISM /online /disable-feature /featurename:HypervisorPlatform
+        ```
+- Create and setup VM
+    1. Open VirtualBox
+    2. Select "Tools" and click "New"
+        1. For "Name" type "Arch"
+        2. For "Type" select "Linux"
+        3. For "Version" select "Arch Linux (64-bit)"
+        4. For "Memory size" use at least 4GB
+        5. For "Hard disk" select "Create a virtual hard disk now"
+        6. Click "Create"
+            1. For "File size" use at least 32GB
+            2. For "Hard disk file type" select "VDI"
+            3. For "Storage on physical hard disk" select "Fixed size"
+            4. Click "Create"
+    3. Select "Arch" and click "Settings"
+        1. For "General" > "Advanced" > "Shared Clipboard" select "Bidirectional"
+        2. For "General" > "Advanced" > "Drag'n'Drop" select "Bidirectional"
+        3. For "System" > "Processor" > "Processor(s)" use at least 4 cores
+        4. For "System" > "Processor" > "Extended Features" > "Enable PAE/NX" check box
+        5. For "System" > "Processor" > "Extended Features" > "Enable Nested VT-x/AMD-V" check box
+        6. For "System" > "Acceleration" > "Paravirtualization Interface" select "Hyper-V"
+        7. For "Screen" > "Video Memory" use maximum value
+        8. For "Network" > "Adapter 1" > "Enable Network Adapter" > "Attached to" select "Bridged Adapter"
+        9. For "USB" > "Enable USB Controller" select "USB 3.0 (xHCI) Controller"
+        10. Click "OK"
+
 ### Part 1
-- Insert Arch Linux iso
 - Startup
+- Insert Arch Linux iso
 1. Set system clock
     ```
     timedatectl set-ntp true
@@ -70,6 +118,7 @@
     echo -e "127.0.0.1 localhost\n::1 localhost\n127.0.1.1 bean.localdomain bean" > /etc/hosts
 14. Install packages
     ```
+    pacman-key --populate archlinux
     pacman -S git gnome gnome-tweaks grub networkmanager sudo vim
     ```
 15. Setup gnome
@@ -115,13 +164,13 @@
 
 ### Part 2
 - Remove Arch Linux iso
-- Insert VirtualBox Guest Additions iso
 - Startup & login to user
+- Insert VirtualBox Guest Additions iso
 - Run VirtualBox Guest Additions iso
+- Remove VirtualBox Guest Additions iso
 - Shutdown
 
 ### Part 3
-- Remove VirtualBox Guest Additions iso
 - Startup & login to user
 1. Install packages
     ```
