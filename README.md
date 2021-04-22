@@ -4,13 +4,13 @@
 
 ### Preconditiions
 - Ensure BIOS is correctly configured
-    ```
-    Using ASUS ROG STRIX Z490-I with BIOS version ???
-    ```
+    - Using ASUS ROG STRIX Z490-I motherboard
     1. Open BIOS
-    1. ??Enable Intel VT-d
-    2. ??Enable Compatibility Support Module
-    3. ??Disable Secure Boot
+    1. For "Advanced" > "CPU Configuration" > "Intel (VXM) Virtualization Technology" select "Enabled"
+    2. For "Advanced" > "System Agent (SA) Configuration" > "VT-d" select "Enabled"
+    3. For "Boot" > "CSM (Compatibility Support Module" > "Launch CSM" select "Enabled"
+    4. For "Boot" > "Secure Boot" > "OS Type" select "Other OS"
+    5. Click "Exit" > "Save Changes & Reset" > "Ok"
 - Ensure Windows is correctly configured
     1. Open Command Prompt in administrator mode
     2. Enable Microsoft Hyper-V
@@ -42,8 +42,8 @@
         1. For "General" > "Advanced" > "Shared Clipboard" select "Bidirectional"
         2. For "General" > "Advanced" > "Drag'n'Drop" select "Bidirectional"
         3. For "System" > "Processor" > "Processor(s)" use at least 4 cores
-        4. For "System" > "Processor" > "Extended Features" > "Enable PAE/NX" check box
-        5. For "System" > "Processor" > "Extended Features" > "Enable Nested VT-x/AMD-V" check box
+        4. Check "System" > "Processor" > "Extended Features" > "Enable PAE/NX"
+        5. Check "System" > "Processor" > "Extended Features" > "Enable Nested VT-x/AMD-V"
         6. For "System" > "Acceleration" > "Paravirtualization Interface" select "Hyper-V"
         7. For "Screen" > "Video Memory" use maximum value
         8. For "Network" > "Adapter 1" > "Enable Network Adapter" > "Attached to" select "Bridged Adapter"
