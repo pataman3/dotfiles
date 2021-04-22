@@ -8,7 +8,7 @@
     1. Open BIOS
     1. For "Advanced" > "CPU Configuration" > "Intel (VXM) Virtualization Technology" select "Enabled"
     2. For "Advanced" > "System Agent (SA) Configuration" > "VT-d" select "Enabled"
-    3. For "Boot" > "CSM (Compatibility Support Module" > "Launch CSM" select "Enabled"
+    3. For "Boot" > "CSM (Compatibility Support Module)" > "Launch CSM" select "Enabled"
     4. For "Boot" > "Secure Boot" > "OS Type" select "Other OS"
     5. Click "Exit" > "Save Changes & Reset" > "Ok"
 - Ensure Windows is correctly configured
