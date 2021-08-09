@@ -1,4 +1,4 @@
-# Arch Linux Installation 
+# Arch Linux Installation
 
 ## Using Window 10's Oracle VM VirtualBox
 
@@ -13,17 +13,21 @@
     5. Click "Exit" > "Save Changes & Reset" > "Ok"
 - Ensure Windows is correctly configured
     1. Open Command Prompt in administrator mode
-    2. Enable Microsoft Hyper-V
+    2. Disable Hyper-V
         ```
-        DISM /online /enable-feature /featurename:Microsoft-Hyper-V-All
+        DISM /online /disable-feature /featurename:Microsoft-Hyper-V-All
         ```
-    3. Disable basic virtual machine platform
+    3. Disable Virtual Machine Platform
         ```
         DISM /online /disable-feature /featurename:VirtualMachinePlatform
         ```
-    4. Disable basic hypervisor platform
+    4. Disable Windows Hypervisor Platform
         ```
         DISM /online /disable-feature /featurename:HypervisorPlatform
+        ```
+    5. Disable Windows Sandbox
+        ```
+        DISM /online /disable-feature /featurename:Containers-DisposableClientVM
         ```
 - Create and setup VM
     1. Open VirtualBox
@@ -44,11 +48,10 @@
         3. For "System" > "Processor" > "Processor(s)" use at least 4 cores
         4. Check "System" > "Processor" > "Extended Features" > "Enable PAE/NX"
         5. Check "System" > "Processor" > "Extended Features" > "Enable Nested VT-x/AMD-V"
-        6. For "System" > "Acceleration" > "Paravirtualization Interface" select "Hyper-V"
-        7. For "Screen" > "Video Memory" use maximum value
-        8. For "Network" > "Adapter 1" > "Enable Network Adapter" > "Attached to" select "Bridged Adapter"
-        9. For "USB" > "Enable USB Controller" select "USB 3.0 (xHCI) Controller"
-        10. Click "OK"
+        6. For "Display" > "Screen" > "Video Memory" use maximum value
+        7. For "Network" > "Adapter 1" > "Enable Network Adapter" > "Attached to" select "Bridged Adapter"
+        8. For "USB" > "Enable USB Controller" select "USB 3.0 (xHCI) Controller"
+        9. Click "OK"
 
 ### Part 1
 - Startup
@@ -211,20 +214,21 @@
         - download gnupg files `public.pgp` & `private.pgp` to `~/Downloads`
     - dropbox
     - protonmail-bridge
-9. Reset file permissions
-    ```
-    chmod 600 ~/Downloads/*
-    ```
-10. Setup ssh
+9. Setup ssh
     ```
     mkdir .ssh
     mv ~/Downloads/id_rsa.pub ~/.ssh/id_rsa.pub
     mv ~/Downloads/id_rsa ~/.ssh/id_rsa
     ```
-11. Setup gnupg
+10. Setup gnupg
     ```
     gpg --import ~/Downloads/public.pgp ~/Downloads/private.pgp
     rm -rf ~/Downloads/*
+    ```
+11. Fix file permissions
+    ```
+    chmod 644 ~/.ssh/idrsa.pub
+    chmod 600 ~/.ssh/idrsa
     ```
 - Shutdown
 
