@@ -189,7 +189,7 @@
     ```
 3. Install aur packages
     ```
-    yay -S mu
+    yay -S mu vscodium-bin
     ```
 4. Install flatpak packages
     ```
