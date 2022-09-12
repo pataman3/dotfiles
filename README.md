@@ -67,9 +67,9 @@
         ```
     2. Create partitions
         ```
-        [n][ENTER][p][ENTER][ENTER][ENTER][+512M][ENTER][a][ENTER]
-        [n][ENTER][p][ENTER][ENTER][ENTER][+4G][ENTER][a][ENTER][ENTER]
-        [n][ENTER][p][ENTER][ENTER][ENTER][ENTER][a][ENTER][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+512M][ENTER][t][ENTER][ef][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+4G][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][ENTER]
         [w][ENTER]
         ```
 3. Format partitions
