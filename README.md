@@ -80,7 +80,7 @@
     ```
 4. Mount file system
     ```
-    mount --mkdir /dev/sda1 /boot/EFI
+    mount --mkdir /dev/sda1 /efi
     swapon /dev/sda2
     mount /dev/sda3 /mnt
     ```
@@ -138,7 +138,7 @@
     ```
 17. Setup grub
     ```
-    grub-install --target=x86_64-efi --efi-directory=/dev/sda1/boot --bootloader-id=GRUB --recheck
+    grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
 18. Setup networkmanager
