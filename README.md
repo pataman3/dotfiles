@@ -67,20 +67,22 @@
         ```
     2. Create partitions
         ```
-        [n][ENTER][p][ENTER][ENTER][ENTER][+200M][ENTER][a][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+300M][ENTER][a][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+4G][ENTER][a][ENTER]
         [n][ENTER][p][ENTER][ENTER][ENTER][ENTER][a][ENTER][ENTER]
         [w][ENTER]
         ```
 3. Format partitions
     ```
-    mkfs.ext4 /dev/sda1
-    mkfs.ext4 /dev/sda2
+    mkfs.fat -F 32 /dev/sda1
+    swapon /dev/sda2
+    mkfs.ext4 /dev/sda3
     ```
 4. Mount file system
     ```
-    mount /dev/sda2 /mnt
-    mkdir /mnt/boot /mnt/home
-    mount /dev/sda1 /mnt/boot
+    mount /dev/sda3 /mnt
+    mount --mkdir /dev/sda1 /boot/EFI
+    swapon /dev/sda2
     ```
 5. Refresh keyrings
     ```
@@ -128,7 +130,7 @@
 15. Install packages
     ```
     pacman-key --populate archlinux
-    pacman -S git gnome gnome-tweaks grub networkmanager sudo vim
+    pacman -S efibootmgr git gnome gnome-tweaks grub networkmanager sudo vim
     ```
 16. Setup gnome
     ```
@@ -136,7 +138,7 @@
     ```
 17. Setup grub
     ```
-    grub-install --target=i386-pc /dev/sda
+    grub-install --target=x86_64-efi --efi-directory=/dev/sda1/boot --bootloader-id=GRUB --recheck
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
 18. Setup networkmanager
