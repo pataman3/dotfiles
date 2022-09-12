@@ -82,70 +82,74 @@
     mkdir /mnt/boot /mnt/home
     mount /dev/sda1 /mnt/boot
     ```
-5. Install base system
+5. Refresh keyrings
+    ```
+    
+    ```
+6. Install base system
     ```
     pacstrap /mnt base base-devel linux linux-firmware
     ```
-6. Generate file system table
+7. Generate file system table
     ```
     genfstab -U /mnt >> /mnt/etc/fstab
     ```
-7. Enter new file system
+8. Enter new file system
     ```
     arch-chroot /mnt
     ```
-8. Build kernel
+9. Build kernel
     ```
     mkinitcpio -p linux
     ```
-9. Set clock
+10. Set clock
     ```
     hwclock --systohc
     ```
-10. Set locale
+11. Set locale
     ```
     sed -i "s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g" /etc/locale.gen
     locale-gen
     echo "LANG=en_US.UTF-8" > /etc/locale.conf
     ```
-11. Set timezone
+12. Set timezone
     ```
     ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
     ```
-12. Set hostname
+13. Set hostname
     ```
     echo "bean" > /etc/hostname
     ```
-13. Set hosts
+14. Set hosts
     ```
     echo -e "127.0.0.1 localhost\n::1 localhost\n127.0.1.1 bean.localdomain bean" > /etc/hosts
-14. Install packages
+15. Install packages
     ```
     pacman-key --populate archlinux
     pacman -S git gnome gnome-tweaks grub networkmanager sudo vim
     ```
-15. Setup gnome
+16. Setup gnome
     ```
     systemctl enable gdm
     ```
-16. Setup grub
+17. Setup grub
     ```
     grub-install --target=i386-pc /dev/sda
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
-17. Setup networkmanager
+18. Setup networkmanager
     ```
     systemctl enable NetworkManager.service
     ```
-18. Setup sudo
+19. Setup sudo
     ```
     sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" /etc/sudoers
     ```
-19. Set root password
+20. Set root password
     ```
     passwd
     ```
-20. Create user
+21. Create user
     1. Add user
         ```
         useradd -m bryan
@@ -158,7 +162,7 @@
         ```
         usermod -aG wheel,audio,video,optical,storage bryan
         ```
-21. Exit & unmount
+22. Exit & unmount
     ```
     exit
     umount -l /mnt
