@@ -136,28 +136,28 @@
     ```
     systemctl enable gdm
     ```
-17a. Create and mount boot directory
+17. Create and mount boot directory
     ```
     mount --mkdir /dev/sda1 /efi
     ```
-17b. Setup grub
+18. Setup grub
     ```
     grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
-18. Setup networkmanager
+19. Setup networkmanager
     ```
     systemctl enable NetworkManager.service
     ```
-19. Setup sudo
+20. Setup sudo
     ```
     sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" /etc/sudoers
     ```
-20. Set root password
+21. Set root password
     ```
     passwd
     ```
-21. Create user
+22. Create user
     1. Add user
         ```
         useradd -m bryan
@@ -170,7 +170,7 @@
         ```
         usermod -aG wheel,audio,video,optical,storage bryan
         ```
-22. Exit & unmount
+23. Exit & unmount
     ```
     exit
     umount -l /mnt
