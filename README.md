@@ -67,7 +67,8 @@
         ```
     2. Create partitions
         ```
-        [n][ENTER][p][ENTER][ENTER][ENTER][+512M][ENTER][t][ENTER][ef][ENTER]
+        [g][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+512M][ENTER]
         [n][ENTER][p][ENTER][ENTER][ENTER][+4G][ENTER]
         [n][ENTER][p][ENTER][ENTER][ENTER][ENTER]
         [w][ENTER]
@@ -78,9 +79,8 @@
     mkswap /dev/sda2
     mkfs.ext4 /dev/sda3
     ```
-4. Mount file system
+4. Turn on swap partition and mount primary file system
     ```
-    mount --mkdir /dev/sda1 /efi
     swapon /dev/sda2
     mount /dev/sda3 /mnt
     ```
@@ -104,7 +104,7 @@
     ```
 9. Build kernel
     ```
-    mkinitcpio -p linux
+    mkinitcpio -P
     ```
 10. Set clock
     ```
@@ -136,7 +136,11 @@
     ```
     systemctl enable gdm
     ```
-17. Setup grub
+17a. Create and mount boot directory
+    ```
+    mount --mkdir /dev/sda1 /efi
+    ```
+17b. Setup grub
     ```
     grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
     grub-mkconfig -o /boot/grub/grub.cfg
