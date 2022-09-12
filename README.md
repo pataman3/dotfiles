@@ -67,8 +67,8 @@
         ```
     2. Create partitions
         ```
-        [n][ENTER][p][ENTER][ENTER][ENTER][+300M][ENTER][a][ENTER]
-        [n][ENTER][p][ENTER][ENTER][ENTER][+4G][ENTER][a][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+512M][ENTER][a][ENTER]
+        [n][ENTER][p][ENTER][ENTER][ENTER][+4G][ENTER][a][ENTER][ENTER]
         [n][ENTER][p][ENTER][ENTER][ENTER][ENTER][a][ENTER][ENTER]
         [w][ENTER]
         ```
