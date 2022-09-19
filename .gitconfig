@@ -1,6 +1,7 @@
 [commit]
 	gpgsign = true
 [user]
+	signingKey = BE6707AD95D55C27
 	name = Bryan Bean
 	email = mail@fabam.net
 [core]
