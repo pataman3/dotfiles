@@ -180,16 +180,9 @@
 ### Part 2
 - Remove Arch Linux iso
 - Startup & login to user
-- Insert VirtualBox Guest Additions iso
-- Run VirtualBox Guest Additions iso
-- Remove VirtualBox Guest Additions iso
-- Shutdown
-
-### Part 3
-- Startup & login to user
 1. Install packages
     ```
-    sudo pacman -S calibre emacs isync fd firefox flatpak fish pinentry python-pip ripgrep rsync
+    sudo pacman -S emacs isync fd firefox flatpak fish pinentry python-pip ripgrep rsync
     ```
 2. Install yay
     ```
@@ -205,7 +198,7 @@
     ```
 4. Install flatpak packages
     ```
-    flatpak install flathub com.bitwarden.desktop com.discordapp.Discord com.dropbox.Client ch.protonmail.protonmail-bridge com.spotify.Client
+    flatpak install flathub com.bitwarden.desktop
     ```
 5. Install pip packages
     ```
