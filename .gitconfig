@@ -1,9 +1,8 @@
 [commit]
 	gpgsign = true
 [user]
-	signingKey = 3298BF529452BDE2
 	name = Bryan Bean
-	email = bryan@bryanbean.com
+	email = mail@fabam.net
 [core]
 	editor = emacs
 [gpg]
