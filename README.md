@@ -217,8 +217,6 @@
     - bitwarden
         - download ssh files `id_rsa.pub` & `id_rsa` to `~/Downloads`
         - download gnupg files `public.pgp` & `private.pgp` to `~/Downloads`
-    - dropbox
-    - protonmail-bridge
 9. Setup ssh
     ```
     mkdir .ssh
@@ -227,7 +225,7 @@
     ```
 10. Setup gnupg
     ```
-    gpg --import ~/Downloads/public.pgp ~/Downloads/private.pgp
+    gpg --import ~/Downloads/public.gpg ~/Downloads/private.gpg
     rm -rf ~/Downloads/*
     ```
 11. Fix file permissions
@@ -237,7 +235,7 @@
     ```
 - Shutdown
 
-### Part 4
+### Part 3
 - Startup & login to user
 1. Install dotfiles
     ```
