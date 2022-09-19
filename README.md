@@ -283,10 +283,7 @@
 - Shutdown
 
 
-
-## TODO
-
-### New SSH
+### How to create new SSH keys
 - Navigate to your home directory and generate a key
     ```
     ssh-keygen -t rsa -b 4096 -C "YOUR_EMAIL@EXAMPLE.COM"
@@ -302,7 +299,7 @@
 - https://github.com/ivakyb/fish_ssh_agent
   - The fish shell ssh agent code
 
-### New GPG
+### How to create new GPG keys
 - Navigate to your home directory and generate a key
     ```
     gpg --full-generate-key
@@ -325,6 +322,6 @@
 - Back up your GPG public and private keys
     - If you do back up your private key this way, just know that anyone who gets a hold of =private.pgp= can effectively sign as you
         ```
-        gpg --export KEY_ID > public.asc
-        gpg --export-secret-key KEY_ID > private.asc
+        gpg --export -a KEY_ID > public.key
+        gpg --export-secret-key -a KEY_ID > private.key
         ```
