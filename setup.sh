@@ -3,6 +3,11 @@
 ln -sf ~/dotfiles/home/.bashrc ~/.bashrc
 
 
+mkdir -p ~/.config/ghostty
+
+ln -sf ~/dotfiles/home/.config/ghostty/config ~/.config/ghostty/config
+
+
 mkdir -p ~/.config/hypr
 
 ln -sf ~/dotfiles/home/.config/hypr/hyprland.conf ~/.config/hypr/hyprland.conf
