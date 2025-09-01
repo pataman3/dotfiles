@@ -1,0 +1,79 @@
+* {
+  border: none;
+  border-radius: 0; 
+  font-family: "M+1Code Nerd Font Propo", IosevkaTerm NFP, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  color: #dddddd;
+}
+
+#clock, #cpu, #memory, #network, #user, #custom-weather, #custom-volume, #custom-hibernate, #custom-reboot, #custom-poweroff {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 6px 0px;
+}
+#custom-poweroff {
+  margin-right: 6px;
+}
+#user {
+  margin-left: 6px;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#battery {
+    background-color: #ffffff;
+    color: black;
+}
+
+#battery.charging {
+    color: white;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

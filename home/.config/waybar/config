@@ -1,0 +1,113 @@
+{
+  "height": 40,
+  "spacing": 6,
+  "layer": "top",
+  "position": "bottom",
+  "margin-left": 10,
+  "margin-right": 10,
+  "margin-bottom": 10,
+
+  "modules-left": ["user", "cpu", "memory"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["custom/weather", "custom/volume", "network#ethernet", "clock#date", "clock#time", "custom/hibernate", "custom/reboot", "custom/poweroff"],
+
+  "network": {
+    "tooltip": false,
+    "interval": 30,
+    "format-wifi": "{essid}    ({signalStrength}%)    {ipaddr}",
+    "format-ethernet": "\u2007{ipaddr}",
+    "format-alt": "\u2007{ifname}  {ipaddr}/{cidr}",
+    "format-linked": "no connection",
+    "format-disconnected": "disconnected",
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "󰋜",
+      "2": "",
+      "3": "󰭹",
+      "4": "󰊴",
+    },
+    "sort-by-number": true,
+  },
+
+  "user": {
+    "tooltip": false,
+    "format": "\u2007{user}",
+    "format-alt": "{work_d} d  {work_H} h  {work_M} m  {work_S} s",
+  },
+
+  "cpu": {
+    "tooltip": false,
+    "interval": 5,
+    "format": "\u2007{usage:02}%",
+  },
+
+  "memory": {
+    "tooltip": false,
+    "interval": 5,
+    "format": "\u2007{percentage:02}%",
+    "format-alt": "\u2007{used:05.1f}\u2007/\u2007{total:05.1f}\u2007GiB",
+  },
+
+  "custom/weather": {
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "return-type": "json",
+    "interval": 900,
+    "on-click": "~/.config/waybar/scripts/weather.sh toggle",
+  },
+
+  "custom/volume": {
+    "exec": "~/.config/waybar/scripts/volume.sh",
+    "return-type": "json", 
+    "interval": 1,
+    "on-click": "~/.config/waybar/scripts/volume.sh mute",
+    "on-scroll-up": "~/.config/waybar/scripts/volume.sh up",
+    "on-scroll-down": "~/.config/waybar/scripts/volume.sh down"
+  },
+
+  "network#ethernet": {
+    "tooltip": false,
+    "interval": 30,
+    "format-ethernet": "󰛳",
+    "format-alt": "󰛳\u2007{ifname}\u2007{ipaddr}/{cidr}",
+    "format-linked": "󰲛 no connection",
+    "format-disconnected": "󰲛 disconnected",
+  },
+
+  "clock#date": {
+    "tooltip": false,
+    "interval": 60,
+    "format": "󰃭\u2007{:%m-%d}",
+    "format-alt": "󰃭\u2007{:%a\u2007%b\u2007%d\u2007%Y}",
+  },
+
+  "clock#time": {
+    "tooltip": false,
+    "interval": 1,
+    "format": "󰥔\u2007{:%R}",
+    "format-alt": "󰥔\u2007{:%r\u2007%Z}",
+  },
+
+  "custom/hibernate": {
+    "exec": "echo 󰜗",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power.sh h l",
+    "on-click-right": "~/.config/waybar/scripts/power.sh h r",
+  },
+
+  "custom/reboot": {
+    "exec": "echo 󰜉",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power.sh r l",
+    "on-click-right": "~/.config/waybar/scripts/power.sh r r",
+  },
+
+  "custom/poweroff": {
+    "exec": "echo ⏻",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power.sh s l",
+    "on-click-right": "~/.config/waybar/scripts/power.sh s r",
+  },
+}
